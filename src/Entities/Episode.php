@@ -13,6 +13,7 @@ class Episode {
 	 * @ORM\Column(type="string")
 	 * @ORM\GeneratedValue(strategy="UUID")
 	 */
+
     protected $id;
 	/**
 	 * @ORM\Column(type="string")
@@ -20,25 +21,54 @@ class Episode {
 	 */
     protected $episodeName;
 
+	/**
+	 * Les episodes sont liés a une serie
+	 * Le serie est en private parce que je veux n'y acceder qu'au travers des getters/setters
+	 * @ORM\ManyToOne(targetEntity="Serie", inversedBy="episodes", cascade={"all"}, fetch="LAZY")
+	 * @ORM\JoinColumn(nullable=false, name="serieId", referencedColumnName="id")
+	 */
+	private $serie;
 
     // getters et setters
+	// ensembles de fonctions/methodes publiques permettant de modifier/acceder aux propriétés private
 
-	public function setName($yolo)
+	/**
+	 * @param $name
+	 */
+	public function setName($name)
 	{
-		$this->episodeName = $yolo;
+		$this->episodeName = $name;
 	}
+
+	/**
+	 * @return string
+	 */
 	public function getName()
 	{
 		return($this->episodeName);
 	}
 
 	/**
-	 * Les episodes sont liés a une serie
-	 * @ORM\ManyToOne(targetEntity="Serie", inversedBy="episodes", cascade={"all"}, fetch="LAZY")
-	 * @ORM\JoinColumn(nullable=false, name="serieId", referencedColumnName="id")
+	 * @param $serie
 	 */
-	private $serie;
+	public function setSerie($serie) {
+		if ($serie){
+			$this->serie = $serie;
+		}
+	}
 
+	/**
+	 * @return mixed
+	 */
+	public function getSerie() {
+		return($this->serie);
+	}
+
+	/**
+	 * Episode constructor.
+	 * Est appelle en faisant $machin = new Tvtruc/Entities/Episode($serie)
+	 * @param $serie
+	 */
 	public function __construct($serie) {
 		if ($serie){
 			$this->serie = $serie;
