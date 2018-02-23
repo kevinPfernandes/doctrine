@@ -14,12 +14,12 @@ echo "<pre>";
 $repository = $entityManager->getRepository('Tvtruc\Entities\Serie');
 
 
-
-echo "-----------------------\r\n";
-echo "findOneBy result + DUMP \r\n";
-echo "-----------------------\r\n";
-// recherche exacte
-$foundSerie = $repository->findOneBy(array('serieName' => 'Hazell'));
+//
+//echo "-----------------------\r\n";
+//echo "findOneBy result + DUMP \r\n";
+//echo "-----------------------\r\n";
+//// recherche exacte
+//$foundSerie = $repository->findOneBy(array('serieName' => 'Hazell'));
 
 // alternativement via "__class magic"
 // $foundSerie = $repository->findOneBySerieName('plipplop');
@@ -32,11 +32,15 @@ $foundSerie = $repository->findOneBy(array('serieName' => 'Hazell'));
 //\Doctrine\Common\Util\Debug::dump($foundSerie);
 
 
-echo "-----------------------\r\n";
-echo "DQL result + DUMP \r\n";
-echo "-----------------------\r\n";
-// je cherche ceux avec "88" dedans
-$dqlSeriesNameSearchPattern = "Hazell";
+//echo "-----------------------\r\n";
+//echo "DQL result + DUMP \r\n";
+//echo "-----------------------\r\n";
+$value_input=$_GET['value'];
+if($value_input== ""){
+    $value_input="Hazell";
+}
+// je cherche ceux avec "$value_input" dedans
+$dqlSeriesNameSearchPattern = "$value_input";
 $query = $repository->createQueryBuilder('s')
 	->where('s.serieName LIKE :name') // les contraintes
 	->setParameter('name', '%'. $dqlSeriesNameSearchPattern .'%') // remplacer :name par l'expression '%88%'
@@ -44,14 +48,30 @@ $query = $repository->createQueryBuilder('s')
     ->getQuery();
 $dqlSeries = $query->getResult();
 
-\Doctrine\Common\Util\Debug::dump($dqlSeries, 5);
+$result = [];
+$tmp = [];
+$tmp['episodes'] = [];
+foreach ($dqlSeries as $serie) {
+    $tmp['serie_banner'] = $serie->getBanner();
+    $tmp['serie_title'] = $serie->getName();
+    $tmp['serie_id'] = $serie->getId();
+    foreach ($serie->episodes as $episode) {
+        $tmp['episodes'][] = $episode->getId();
+        $tmp['episodes'][] = $episode->getName();
+    }
+    $result[] = $tmp;
+}
+$json_result = json_encode($result);
+echo($json_result);
 
-
-echo "-----------------------\r\n";
-echo "findAll result DUMP \r\n";
-echo "-----------------------\r\n";
+//\Doctrine\Common\Util\Debug::dump($dqlSeries, 5);
+//
+//
+//echo "-----------------------\r\n";
+//echo "findAll result DUMP \r\n";
+//echo "-----------------------\r\n";
 // retourne les tous
-$series = $repository->findby(array(),array('id' => 'DESC'),10);
+//$series = $repository->findby(array(),array('id' => 'DESC'),10);
 // alternativement
 // $seriesList = $repository->findAll('Tvtruc\Entities\Series');
 
@@ -67,34 +87,34 @@ $series = $repository->findby(array(),array('id' => 'DESC'),10);
 //	}
 //}
 
-$result = [];
-$tmp = [];
-$tmp['episodes'] = [];
-foreach ($series as $serie) {
-    $tmp['serie_title'] = $serie->getName();
-    foreach ($serie->episodes as $episode) {
-        $tmp['episodes'][] = $episode->getName();
-    }
-
-    $result[] = $tmp;
-}
-$json_result = json_encode($result);
-echo($json_result);
-
-echo "-----------------------\r\n";
-echo "findAll result EXPORT + print_r \r\n";
-echo "-----------------------\r\n";
- // retourne la version "lisible"
-$exportedSeries = \Doctrine\Common\Util\Debug::export($series,4);
-print_r($exportedSeries);
-
-echo "-----------------------\r\n";
-echo "findAll result EXPORT + JSON_ENCODE \r\n";
-echo "-----------------------\r\n";
-echo json_encode($exportedSeries, JSON_PRETTY_PRINT);
+//$result = [];
+//$tmp = [];
+//$tmp['episodes'] = [];
+//foreach ($series as $serie) {
+//    $tmp['serie_title'] = $serie->getName();
+//    foreach ($serie->episodes as $episode) {
+//        $tmp['episodes'][] = $episode->getName();
+//    }
+//    $result[] = $tmp;
+//}
+//$json_result = json_encode($result);
+//echo($json_result);
 
 
-
-
-
-echo "<pre>";
+//echo "-----------------------\r\n";
+//echo "findAll result EXPORT + print_r \r\n";
+//echo "-----------------------\r\n";
+// // retourne la version "lisible"
+//$exportedSeries = \Doctrine\Common\Util\Debug::export($series,4);
+//print_r($exportedSeries);
+//
+//echo "-----------------------\r\n";
+//echo "findAll result EXPORT + JSON_ENCODE \r\n";
+//echo "-----------------------\r\n";
+//echo json_encode($exportedSeries, JSON_PRETTY_PRINT);
+//
+//
+//
+//
+//
+//echo "<pre>";

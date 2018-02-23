@@ -47,6 +47,9 @@ class Episode {
 		return($this->episodeName);
 	}
 
+    public function getId() {
+        return($this->id);
+    }
 	/**
 	 * @param $serie
 	 */
