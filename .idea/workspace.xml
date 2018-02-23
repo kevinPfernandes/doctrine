@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8aef66e2-0570-491b-abb9-8a98c88e8870" name="Default" comment="">
       <change beforePath="" afterPath="$PROJECT_DIR$/.idea/webServers.xml" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/Entities/Banner.php" />
       <change beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="$PROJECT_DIR$/.idea/deployment.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/queries.php" afterPath="$PROJECT_DIR$/app/queries.php" />
@@ -250,7 +251,7 @@
       <workItem from="1519295460427" duration="15019000" />
       <workItem from="1519373128546" duration="6818000" />
       <workItem from="1519382003508" duration="1180000" />
-      <workItem from="1519385006154" duration="7104000" />
+      <workItem from="1519385006154" duration="7277000" />
     </task>
     <task id="LOCAL-00001" summary="first push">
       <created>1519382891519</created>
@@ -263,7 +264,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33444000" />
+    <option name="totallyTimeSpent" value="33617000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-40" y="15" width="1190" height="919" extended-state="0" />
