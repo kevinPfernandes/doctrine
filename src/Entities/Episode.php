@@ -5,7 +5,7 @@ namespace Tvtruc\Entities;
 use Doctrine\ORM\Mapping AS ORM;
 use Tvtruc\Entities\Serie;
 /**
- * @ORM\Entity @ORM\Table(name="episode")
+ * @ORM\Entity @ORM\Table(name="tvepisodes")
  **/
 class Episode {
 	/**
@@ -16,8 +16,7 @@ class Episode {
 
     protected $id;
 	/**
-	 * @ORM\Column(type="string")
-	 * @var string
+	 * @ORM\Column(type="string", name="EpisodeName")
 	 */
     protected $episodeName;
 
@@ -25,7 +24,7 @@ class Episode {
 	 * Les episodes sont liés a une serie
 	 * Le serie est en private parce que je veux n'y acceder qu'au travers des getters/setters
 	 * @ORM\ManyToOne(targetEntity="Serie", inversedBy="episodes", cascade={"all"}, fetch="LAZY")
-	 * @ORM\JoinColumn(nullable=false, name="serieId", referencedColumnName="id")
+	 * @ORM\JoinColumn(nullable=false, name="seriesid", referencedColumnName="id")
 	 */
 	private $serie;
 

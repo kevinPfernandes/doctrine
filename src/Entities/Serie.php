@@ -8,18 +8,17 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Tvtruc\Entities\Episode;
 
 /**
- * @ORM\Entity @ORM\Table(name="serie")
+ * @ORM\Entity @ORM\Table(name="tvseries")
  **/
 class Serie {
 	/**
 	 * @ORM\Id
 	 * @ORM\Column(type="string")
-	 * @ORM\GeneratedValue(strategy="UUID")
+     * @var string
 	 */
     protected $id;
 	/**
-	 * @ORM\Column(type="string")
-	 * @var string
+	 * @ORM\Column(type="string", name="SeriesName")
 	 */
     protected $serieName;
 

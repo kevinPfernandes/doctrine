@@ -23,7 +23,7 @@ $dbParams = [
 	'charset'  => 'utf8',
 	'user'     => 'root',
 	'password' => '',
-	'dbname'   => 'tvtruc',
+	'dbname'   => 'tvdb',
 ];
 
 $config = Setup::createAnnotationMetadataConfiguration(
